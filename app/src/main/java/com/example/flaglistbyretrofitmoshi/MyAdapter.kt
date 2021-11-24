@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+
 
 class MyAdapter(private val data: List<Data>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>()  {
 
@@ -18,7 +18,18 @@ class MyAdapter(private val data: List<Data>) : RecyclerView.Adapter<MyAdapter.M
 
             title.text = data.name
 
-            Glide.with(imageView.context).load(data.flag).into(imageView)
+           val imageLoader = ImageLoader.Builder(view.context)
+                .componentRegistry { add(SvgDecoder(view.context)) }
+                .build()
+
+            val request = ImageRequest.Builder(view.context)
+                .crossfade(true)
+                .crossfade(500)
+                .data(data.flag)
+                .target(imageView)
+                .build()
+
+            imageLoader.enqueue(request)
         }
     }
 
