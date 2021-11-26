@@ -1,4 +1,4 @@
-# HW Product List
+# CountryListAPI
 <br />
 An android application that displays list of names country  with their flags
 
